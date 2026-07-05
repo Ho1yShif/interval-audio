@@ -62,8 +62,8 @@ to any static host (Render Static Site, Cloudflare Pages, Netlify, GitHub Pages)
 
 ## Notes
 
-- The contact form composes a `mailto:` to the studio address (no backend). Swap
-  the submit handler in `src/pages/Contact.jsx` for Formspree / Netlify Forms if a
-  hosted handler is preferred.
+- The contact form POSTs to [Formspree](https://formspree.io) (`src/pages/Contact.jsx`),
+  driven by the `VITE_FORMSPREE_ID` env var (see `.env.example`). If the ID is missing it
+  shows an error with a `mailto:` fallback to the studio address.
 - Portfolio trailers are embedded via `youtube-nocookie.com` iframes — the only
   external runtime requests, matching the original site.

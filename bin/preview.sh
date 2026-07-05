@@ -11,19 +11,14 @@
 #   bin/preview.sh -- --port 4000
 #   bin/preview.sh prod -- --port 4000
 #
-# NOTE: the site is served from the GitHub Pages project subpath
-# (base "/interval-audio/" in vite.config.js), so locally it lives under
-# http://localhost:<port>/interval-audio/ — the bare root will 404. Vite
-# prints the full URL on startup; open that one.
+# The site is served at the root path (base "/" in vite.config.js, matching the
+# custom domain interval-audio.com), so it lives at bare http://localhost:<port>/.
+# Vite prints the full URL on startup.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
 npm install
-
-# The site is served from a base path (matches the GitHub Pages project URL),
-# so the app lives under this sub-path rather than "/".
-echo "NOTE: the site is served under /interval-audio-og/ — open the URL Vite prints, not bare localhost:PORT/."
 
 if [[ "${1:-}" == "prod" || "${1:-}" == "build" ]]; then
   shift
