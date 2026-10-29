@@ -95,3 +95,55 @@ TXT record to prevent domain takeover.
   returns the four `185.199.108–111.153` IPs.
 - **Formspree end-to-end:** submit the contact form on the live site; confirm the Formspree
   dashboard logs it and the email arrives (no missing-ID error/`mailto` fallback).
+
+---
+
+# Image pipeline plan: generate images in CI, serve WebP only
+
+## Context
+
+`npm run optimize` makes 7 files per image (AVIF and WebP at up to 3 widths, plus one
+JPEG). These files and `src/data/images.json` are committed, so the repo holds about 230
+generated images for 33 originals. All current browsers support WebP, so AVIF and JPEG add
+little for this site.
+
+The goal is to keep only `assets/originals/` in git. To add a film, add a poster and an
+entry in `src/data/portfolio.json`, then push.
+
+## Steps
+
+1. **`scripts/optimize-images.mjs`:** Stop writing AVIF and JPEG files. Write WebP only, at
+   400px, 800px, and the original width. In each manifest entry, keep one `srcset` string
+   and set `fallback` to the largest WebP.
+2. **Skip work that is already done.** Do not regenerate an output file that exists and is
+   newer than its original. This keeps `npm run dev` fast after the first run.
+3. **`package.json`:** Run the optimizer before dev and build, because `Image.jsx` imports
+   `images.json` and the build fails without it:
+   ```json
+   "dev": "node scripts/optimize-images.mjs && vite",
+   "build": "node scripts/optimize-images.mjs && vite-react-ssg build",
+   ```
+4. **`src/components/Image.jsx`:** Replace `<picture>` and its two `<source>` elements with
+   one `<img srcSet sizes>`. Keep `width`, `height`, lazy loading, and the `BASE_URL`
+   prefix.
+5. **`.gitignore`:** Add `public/img/` and `src/data/images.json`, then remove them from
+   the index:
+   ```bash
+   git rm -r --cached public/img src/data/images.json
+   ```
+6. **`.github/workflows/deploy.yml`:** No change is needed, because `npm ci` installs
+   `sharp` and `npm run build` now runs the optimizer. If builds get slow, cache
+   `public/img/` with `actions/cache`, keyed on a hash of `assets/originals/**` and the
+   script.
+7. **`README.md`:** Update "Content & assets" so it says generated images are not
+   committed and the build creates them.
+
+## Verification
+
+- Delete `public/img/` and `src/data/images.json`, then run `npm run build`. The build
+  succeeds and `dist/img/` contains only `.webp` files.
+- Run `npm run dev` twice. The second start skips the optimizer work.
+- In the browser Network tab, the portfolio grid loads one WebP per poster at a width that
+  matches the layout.
+- Push to `main` and confirm the GitHub Actions deploy succeeds and images load on the
+  live site.
