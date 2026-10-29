@@ -285,5 +285,18 @@
       "provider": "youtube",
       "id": "fsGMneKuoKM"
     }
+  },
+  {
+    "title": "Sogna",
+    "slug": "sogna",
+    "image": "portfolio-sogna.jpg",
+    "description": "Set against the backdrop of wartime Tuscany, the story follows a father and his two young daughters trying to escape political tensions and displacement. As they hide out and navigate danger, the youngest daughter escapes into surreal dreamscapes where girls in white dance in the woods."
+  },
+  {
+    "title": "Music Ruined My Life",
+    "slug": "music-ruined-my-life",
+    "image": "portfolio-music-ruined-my-life.jpg",
+    "description": "Abandoned dreams can leave a dull ache. Music Ruined My Life is a darkly funny documentary about those dreams and that ache. Built from three decades of archives, it follows one filmmaker back to a short-lived punk-jazz experiment, not to rediscover it, but to understand why it still matters. This movie is for anyone who chased something, quit, but never quite let it go.",
+    "lead": "Music Ruined My Life"
   }
 ]

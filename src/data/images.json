@@ -99,6 +99,16 @@
     },
     "fallback": "/img/portfolio-county-rescue-1200.jpg"
   },
+  "portfolio-music-ruined-my-life.jpg": {
+    "width": 1067,
+    "height": 1600,
+    "aspectRatio": 0.6669,
+    "srcset": {
+      "avif": "/img/portfolio-music-ruined-my-life-400.avif 400w, /img/portfolio-music-ruined-my-life-800.avif 800w, /img/portfolio-music-ruined-my-life-1067.avif 1067w",
+      "webp": "/img/portfolio-music-ruined-my-life-400.webp 400w, /img/portfolio-music-ruined-my-life-800.webp 800w, /img/portfolio-music-ruined-my-life-1067.webp 1067w"
+    },
+    "fallback": "/img/portfolio-music-ruined-my-life-1067.jpg"
+  },
   "portfolio-new-portfolio-item-1.png": {
     "width": 1200,
     "height": 1800,
@@ -258,6 +268,16 @@
       "webp": "/img/portfolio-rockabye-birdy-400.webp 400w, /img/portfolio-rockabye-birdy-800.webp 800w, /img/portfolio-rockabye-birdy-1200.webp 1200w"
     },
     "fallback": "/img/portfolio-rockabye-birdy-1200.jpg"
+  },
+  "portfolio-sogna.jpg": {
+    "width": 1067,
+    "height": 1600,
+    "aspectRatio": 0.6669,
+    "srcset": {
+      "avif": "/img/portfolio-sogna-400.avif 400w, /img/portfolio-sogna-800.avif 800w, /img/portfolio-sogna-1067.avif 1067w",
+      "webp": "/img/portfolio-sogna-400.webp 400w, /img/portfolio-sogna-800.webp 800w, /img/portfolio-sogna-1067.webp 1067w"
+    },
+    "fallback": "/img/portfolio-sogna-1067.jpg"
   },
   "portfolio-songs-from-the-hole.png": {
     "width": 1200,
