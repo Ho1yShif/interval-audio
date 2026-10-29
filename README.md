@@ -11,7 +11,7 @@ runtime dependency**.
   — every route (including all portfolio item pages) is pre-rendered to static HTML at build time.
 - **react-router-dom** for routing.
 - Self-hosted fonts (Young Serif + Bitter) and locally optimized images
-  (responsive AVIF / WebP / JPEG via `sharp`).
+  (responsive WebP via `sharp`).
 
 ## Develop
 
@@ -25,7 +25,13 @@ npm run preview    # serve the built dist/
 ## Content & assets
 
 Content and images were captured from the live site into `src/data/` and
-`assets/originals/`, then optimized into `public/img/`. To refresh from source:
+`assets/originals/`. Only the originals are in git. `npm run dev` and
+`npm run build` run `scripts/optimize-images.mjs` first, which writes WebP files
+to `public/img/` and the manifest to `src/data/images.json`. It skips images that
+are already up to date.
+
+To add a film, add its poster to `assets/originals/` and its entry to
+`src/data/portfolio.json`, then push.
 
 ```bash
 npm run extract    # re-pull content + originals  (scripts/extract-content.mjs)
@@ -34,7 +40,7 @@ npm run optimize   # regenerate responsive images  (scripts/optimize-images.mjs)
 
 - `src/data/site.json` — homepage, about, contact, footer, services, social.
 - `src/data/portfolio.json` — all portfolio items (title, slug, image, description, video).
-- `src/data/images.json` — generated responsive-image manifest (do not edit by hand).
+- `src/data/images.json` — generated responsive-image manifest (not committed).
 
 ## Structure
 
@@ -45,7 +51,7 @@ src/
   data/         extracted content + image manifest
   styles/       global tokens + base styles
 scripts/        one-time extraction + image optimization
-public/         fonts, optimized images, favicon
+public/         fonts, favicon, generated images (img/, not committed)
 ```
 
 Routes are defined in `src/routes.jsx`. Note the About page is served at
